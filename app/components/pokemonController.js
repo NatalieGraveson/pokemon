@@ -40,17 +40,13 @@ export default class PokemonController {
   constructor() {
     _pokemonService.addSubscriber('apiPokemon', drawApiPokemon)
     _pokemonService.addSubscriber('activePokemon', drawActivePokemon)
-    _pokemonService.addSubscriber('activePokemon', drawMyCatches)
+    _pokemonService.addSubscriber('myCatches', drawMyCatches)
     _pokemonService.getMyCatchesData()
     _pokemonService.getPokemonData()
-    _pokemonService.getOneApiPokemon()
-
-
-
   }
 
-  Catch(name) {
-    _pokemonService.Catch(name)
+  Catch() {
+    _pokemonService.Catch()
   }
 
   getOneApiPokemon(url) {

@@ -1,12 +1,14 @@
 import Pokemon from "../models.js/pokemon.js";
 
 
+// @ts-ignore
 let _pokeAPI = axios.create({
   baseURL: 'https://pokeapi.co/api/v2/pokemon'
 })
 
+// @ts-ignore
 let _sandbox = axios.create({
-  baseURL: 'https://bcw-sandbox.herokuapp.com/api/Natalie/pokemon'
+  baseURL: 'https://bcw-sandbox.herokuapp.com/api/Natalie/heroes'
 })
 
 let _state = {
@@ -48,8 +50,8 @@ export default class PokemonService {
     return _state.myCatches.map(p => new Pokemon(p))
   }
 
-  Catch(name) {
-    let pokemon = _state.apiPokemon.find(Pokemon => Pokemon.name == name)
+  Catch() {
+    let pokemon = _state.activePokemon
     _sandbox.post('', pokemon)
       .then(res => {
         this.getMyCatchesData()
@@ -57,15 +59,17 @@ export default class PokemonService {
   }
 
   getMyCatchesData() {
+    console.warn('getting catches')
     _sandbox.get()
       .then(res => {
-        let data = res.data.results.map(p => new Pokemon(p))
+        let data = res.data.data.map(p => new Pokemon(p))
         setState('myCatches', data)
       })
   }
 
 
   getPokemonData() {
+    console.warn('getting pokedata')
     _pokeAPI.get('?limit=50')
       .then(res => {
         let data = res.data.results.map(p => new Pokemon(p))
