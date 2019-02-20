@@ -23,7 +23,7 @@ export default class Pokemon {
 
   getDetailedTemplate() {
     return `
-      <div class="card">
+      <div class="card text-white bg-transparent border-light">
         <img class="card-img-top" src="${this.img}" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">${this.name}</h5>
