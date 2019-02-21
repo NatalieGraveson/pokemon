@@ -41,7 +41,7 @@ export default class PokemonService {
   }
 
   get ApiPokemon() {
-    return _state.apiPokemon.map(p => new Pokemon(p))
+    return _state.apiPokemon.map(p => p)
   }
   get ActivePokemon() {
     return new Pokemon(_state.activePokemon)
@@ -72,7 +72,7 @@ export default class PokemonService {
     console.warn('getting pokedata')
     _pokeAPI.get('?limit=50')
       .then(res => {
-        let data = res.data.results.map(p => new Pokemon(p))
+        let data = res.data.results
         setState('apiPokemon', data)
       })
   }
